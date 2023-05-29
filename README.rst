@@ -4,14 +4,8 @@ Puput
 .. image:: https://img.shields.io/pypi/v/puput.svg
     :target: https://pypi.python.org/pypi/puput/
 
-.. image:: https://travis-ci.org/APSL/puput.svg?branch=master
-    :target: https://travis-ci.org/APSL/puput
-    
 .. image:: https://readthedocs.org/projects/puput/badge/?version=latest
     :target: https://readthedocs.org/projects/puput/?badge=latest
-    
-.. image:: https://api.codacy.com/project/badge/grade/f96e31ee1b8c4aa2b1402f12308afe96    
-   :target: https://www.codacy.com/app/marctc/puput
 
 .. image:: https://img.shields.io/pypi/pyversions/puput.svg
     :target: https://pypi.org/project/puput/
@@ -43,6 +37,7 @@ Features
 * Extensible entry model
 * Configurable default template color
 * Social share of blog entries (Facebook, Twitter and LinkedIn)
+* Markdown fields (https://github.com/torchbox/wagtail-markdown)
 
 
 .. image:: http://i.imgur.com/d13sGI3.png
@@ -51,14 +46,11 @@ Examples of blog sites made with Puput
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * `Open Study Room <https://openstudyroom.org/blog/>`_
-* `Ncora Blog <https://www.ncora.com/blog/>`_
-* `Ncora TV <https://www.ncora.com/tv/>`_
 * `APSL <https://www.apsl.net/blog/>`_
 * `Nautic Advisor <https://www.nauticadvisor.com/blog/>`_
 * `Trespams <http://trespams.com/blog/>`_
 * `Body Therapy <http://bodytherapy.ru/blog/>`_
 * `Astro <http://www.mallorcasoft.es/blog/>`_
-* `Kontrabando Film Festival <https://www.kontrabandofilmfestival.org/blog/>`_
 * `IP/DE <https://ipde.com/>`_
 
 Setup

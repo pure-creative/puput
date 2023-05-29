@@ -1,6 +1,41 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+1.2.1 (2023-05-16)
+------------------
+* Add Python 3.11 support. Drop Python <=3.7 support.
+* Add Django 4 support. Drop Django <3.2 support.
+* Apply black.
+* Update tox.
+* Add markdown to EntryPages.
+
+1.2.0 (2022-12-16)
+------------------
+* Add Wagtail 4 support. Drop Wagtail <3 support.
+* Drop Django <2.2 support.
+* Update requirements-test.
+* Update tox.
+* Fix: include Python 3.10 on setup classifiers.
+
+1.1.4 (2022-12-14)
+------------------
+* Add Wagtail 3 support.
+* Add Python 3.10 support. Drop Python 3.6 support.
+* Remove travis.
+* Fix tests suite and apply flake8.
+* Updated some docs.
+
+1.1.3 (2021-11-05)
+------------------
+* Add Django 3.2 support. Drop Django <2.2 support.
+* Add Wagtail 2.10-2.14 support.
+* Add Python 3.9 to travis test matrix.
+* Updated some docs.
+* Fix circular imports.
+
 1.1.1 (2020-06-13)
 ------------------
 * Add Django 3.0 support. Drop Python 3.5 support.

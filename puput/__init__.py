@@ -1,9 +1,10 @@
 __author__ = "Marc Tudurí"
 __email__ = "marctc@gmail.com"
-__version__ = "1.1.1"
+__version__ = "1.2.1"
 
 PUPUT_APPS = (
     # Wagtail apps
+    "wagtail.contrib.legacy.richtext",
     "wagtail.core",
     "wagtail.admin",
     "wagtail.documents",
@@ -23,6 +24,7 @@ PUPUT_APPS = (
     "django_social_share",
     # Puput apps
     "puput",
+    "wagtailmarkdown",
 )
 
 default_app_config = "puput.apps.PuputAppConfig"
