@@ -4,6 +4,28 @@ Changelog
 Unreleased
 ----------
 
+
+2.2.0 (2025-04-07)
+------------------
+* Add Wagtail 6.2 and 6.3 support.
+* EntryPage: auto slug generation from title
+* Upgrade django-taggit >=5.0,<6.2
+ 
+2.1.1 (2024-06-25)
+------------------
+* Update docs
+ 
+2.1.0 (2024-06-14)
+------------------
+* Add Wagtail 6.1 support. Drop Wagtail <=5.2 support.
+* Add Django 5.0 support.
+
+2.0.0 (2023-07-04)
+------------------
+* Add Wagtail 5.0 support. Drop Wagtail <=4.0 support.
+* Add Django 4.2 support.
+* Upgrade jQuery to 2.2.4
+
 1.2.1 (2023-05-16)
 ------------------
 * Add Python 3.11 support. Drop Python <=3.7 support.
@@ -103,7 +125,7 @@ Unreleased
 * Add German and Polish translations.
 
 0.9.1 (2017-09-12)
-----------------
+------------------
 * Add missing migration.
 
 0.9 (2017-08-03)

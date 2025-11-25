@@ -4,17 +4,17 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
-    MultiFieldPanel,
     InlinePanel,
-    PageChooserPanel,
+    MultiFieldPanel,
+    TitleFieldPanel,
 )
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtailmarkdown.fields import MarkdownField
-from colorful.fields import RGBColorField
 
+from .fields import ColorField
 from .utils import get_image_model_path
 import markdown
 
@@ -35,7 +35,7 @@ class BlogAbstract(models.Model):
         related_name="+",
     )
 
-    main_color = RGBColorField(_("Blog Main Color"), default="#4D6AE0")
+    main_color = ColorField(_("Blog Main Color"), default="#4D6AE0")
 
     display_comments = models.BooleanField(default=False, verbose_name=_("Display comments"))
     display_categories = models.BooleanField(default=True, verbose_name=_("Display categories"))
@@ -126,7 +126,7 @@ class EntryAbstract(models.Model):
     content_panels = [
         MultiFieldPanel(
             [
-                FieldPanel("title", classname="title"),
+                TitleFieldPanel("title", classname="title"),
                 FieldPanel("header_image"),
                 FieldPanel("body", classname="full"),
                 FieldPanel("markdown_body"),
@@ -141,7 +141,7 @@ class EntryAbstract(models.Model):
                 InlinePanel(
                     "related_entrypage_from",
                     label=_("Related Entries"),
-                    panels=[PageChooserPanel("entrypage_to")],
+                    panels=[FieldPanel("entrypage_to")],
                 ),
             ],
             heading=_("Metadata"),

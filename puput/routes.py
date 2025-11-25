@@ -7,8 +7,14 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core.models import Page
-from wagtail.search.models import Query
+from wagtail.models import Page
+import wagtail
+
+if wagtail.VERSION[:2] < (6, 0):
+    from wagtail.search.models import Query
+else:
+    # https://docs.wagtail.org/en/stable/releases/6.0.html#query-model-moved-to-wagtail-contrib-search-promotions
+    from wagtail.contrib.search_promotions.models import Query
 
 from .utils import get_object_or_None
 
