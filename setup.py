@@ -28,7 +28,7 @@ setup(
         'wagtail>=5.2,<7.1',
         'django-el-pagination==4.0.0',
         'django-taggit>=5.0,<6.2',
-        'wagtail-markdown==0.11.1'
+        'wagtail-markdown>=0.11.1,<0.15.0'
     ],
     url='http://github.com/APSL/puput',
     author=get_metadata('puput', 'author'),
