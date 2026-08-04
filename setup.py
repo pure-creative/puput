@@ -30,7 +30,7 @@ setup(
         'django-taggit>=5.0,<6.2',
         'wagtail-markdown>=0.11.1,<0.15.0'
     ],
-    url='http://github.com/APSL/puput',
+    url='https://github.com/pure-creative/puput',
     author=get_metadata('puput', 'author'),
     author_email=get_metadata('puput', 'email'),
     long_description_content_type='text/x-rst',
