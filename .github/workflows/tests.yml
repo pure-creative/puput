@@ -1,18 +1,25 @@
 name: Test
 
-on: [push]
+on:
+  push:
+    branches: [master]
+    tags: ["v*"]
+  pull_request:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    # Was ubuntu-20.04, which GitHub retired. A job requesting a retired image
+    # is cancelled rather than failed, which is why every run since February
+    # reads "cancelled" and why nothing here has actually executed in months.
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.12", "3.13"]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -21,3 +28,62 @@ jobs:
           python -m pip install tox tox-gh-actions
       - name: Test with tox
         run: tox
+
+  publish:
+    needs: [test]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build tooling
+        run: pip install build twine
+
+      # This package takes its version from puput/__init__.py, not from the
+      # tag, so the two can silently disagree. That already happened once in
+      # this stack: pure-ai-suite was tagged v0.3.1 without bumping its static
+      # version and published as 0.3.0, which is invisible until someone reads
+      # the index. Fail here instead.
+      - name: Check the tag matches the declared version
+        run: |
+          declared=$(python -c "import re,pathlib; print(re.search(r'__version__ = .([^\'\"]+)', pathlib.Path('puput/__init__.py').read_text()).group(1))")
+          tagged="${GITHUB_REF_NAME#v}"
+          echo "declared=$declared tag=$tagged"
+          if [ "$declared" != "$tagged" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match puput/__init__.py __version__ ($declared)."
+            echo "Bump puput/__init__.py first, then tag that commit."
+            exit 1
+          fi
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Check package metadata
+        run: twine check dist/*
+
+      - name: Check the Cloudsmith credential is present
+        env:
+          TWINE_PASSWORD: ${{ secrets.CLOUDSMITH_API_KEY }}
+        run: |
+          if [ -z "$TWINE_PASSWORD" ]; then
+            echo "::error::CLOUDSMITH_API_KEY is not set in this repository's Actions secrets."
+            echo "Add it under Settings > Secrets and variables > Actions, then re-run this job."
+            exit 1
+          fi
+
+      # No --skip-existing: twine 7.0.0 raises UnsupportedConfiguration for any
+      # repository URL that is not PyPI or TestPyPI, and twine is unpinned here.
+      - name: Publish to Cloudsmith
+        env:
+          TWINE_USERNAME: token
+          TWINE_PASSWORD: ${{ secrets.CLOUDSMITH_API_KEY }}
+        run: |
+          twine upload --non-interactive \
+            --repository-url "https://python.cloudsmith.io/pure-creative/pure-stack/" \
+            dist/*
