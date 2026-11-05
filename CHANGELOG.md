@@ -3,6 +3,9 @@ Changelog
 
 Unreleased
 ----------
+* 2.2.0+pure.2 (Pure Creative fork): allow Wagtail 7.4 LTS. `setup.py` now declares
+  `wagtail>=5.2,<8.0` (it was `<7.1`), tox tests Django 5.2 against both Wagtail 7.0
+  and 7.4, and the Django classifiers list 5.2 in place of 4.2 and 5.0.
 
 
 2.2.0 (2025-04-07)
