@@ -1,6 +1,6 @@
 __author__ = "Marc Tudurí"
 __email__ = "marctc@gmail.com"
-__version__ = "2.2.0+pure.2"
+__version__ = "2.2.0+pure.3"
 
 PUPUT_APPS = (
     # Wagtail apps

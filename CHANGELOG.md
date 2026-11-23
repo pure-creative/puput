@@ -3,6 +3,11 @@ Changelog
 
 Unreleased
 ----------
+* 2.2.0+pure.3 (Pure Creative fork): allow Wagtail 8 and Django 6.1, and require
+  Python 3.13. `setup.py` declares `wagtail>=7.4,<9.0`, `wagtail-markdown>=0.15`
+  (0.15.0 is its first release for Wagtail 8) and `python_requires>=3.13`. tox tests
+  Python 3.13 on Wagtail 7.4 with Django 5.2, and on Wagtail 8.1 with Django 5.2 and
+  6.1; Wagtail 7.0, Python 3.12 and the Wagtail 5 and 6 classifiers are dropped.
 * 2.2.0+pure.2 (Pure Creative fork): allow Wagtail 7.4 LTS. `setup.py` now declares
   `wagtail>=5.2,<8.0` (it was `<7.1`), tox tests Django 5.2 against both Wagtail 7.0
   and 7.4, and the Django classifiers list 5.2 in place of 4.2 and 5.0.
