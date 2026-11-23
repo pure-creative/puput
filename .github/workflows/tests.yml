@@ -79,6 +79,11 @@ jobs:
 
       # No --skip-existing: twine 7.0.0 raises UnsupportedConfiguration for any
       # repository URL that is not PyPI or TestPyPI, and twine is unpinned here.
+      #
+      # Only the wheel goes to the index. The package is pure Python, so nothing
+      # installs the sdist, and uploading it doubled what each release keeps on
+      # the index (pure-creative/pure-creative-meta#88). The sdist is still built
+      # and checked above.
       - name: Publish to Cloudsmith
         env:
           TWINE_USERNAME: token
@@ -86,4 +91,4 @@ jobs:
         run: |
           twine upload --non-interactive \
             --repository-url "https://python.cloudsmith.io/pure-creative/pure-stack/" \
-            dist/*
+            dist/*.whl
