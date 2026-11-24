@@ -81,9 +81,9 @@ jobs:
       # repository URL that is not PyPI or TestPyPI, and twine is unpinned here.
       #
       # Only the wheel goes to the index. The package is pure Python, so nothing
-      # installs the sdist, and uploading it doubled what each release keeps on
-      # the index (pure-creative/pure-creative-meta#88). The sdist is still built
-      # and checked above.
+      # installs the sdist, and uploading it would double what each release keeps
+      # on the index (pure-creative/pure-creative-meta#88). The sdist is still
+      # built and checked above.
       - name: Publish to Cloudsmith
         env:
           TWINE_USERNAME: token
